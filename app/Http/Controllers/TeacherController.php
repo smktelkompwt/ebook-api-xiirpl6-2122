@@ -39,6 +39,11 @@ class TeacherController extends Controller
             "date_of_birth" => $request->date_of_birth,
         ]);
 
+        // sent email if env is production
+        if (App::environment(['production'])) {
+            Maill::("afdasdf","asfasdf");
+        }
+
         return [
             "status" => "201",
             "message" => "Save data is success",
@@ -56,21 +61,23 @@ class TeacherController extends Controller
     {
         // return Teacher::where("id", $id)->get();
         $data = Teacher::find($id);
+        $statusCode = 200;
         if($data) {
             $result = [
-                "status" => "200",
+                "status" => $statusCode,
                 "message" => "Load data is success",
                 "data" => $data
             ];
 
             return $result;
         }else{
+            $statusCode = 404;
             $result = [
                 "status" => "404",
                 "message" => "Data not found"
             ];
 
-            return $result;
+            return response($result, $statusCode);
         }
     }
 

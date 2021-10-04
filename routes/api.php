@@ -50,3 +50,6 @@ Route::get('/controller', 'App\Http\Controllers\ProfileController@index');
 
 Route::resource('namas', 'App\Http\Controllers\NamaFullController');
 Route::resource('teachers', 'App\Http\Controllers\TeacherController')->except('create', 'edit');
+
+
+Route::resource('register', 'App\Http\Controllers\AuthController');
